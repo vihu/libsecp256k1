@@ -115,7 +115,7 @@ ecdsa_verify(_, _, _) ->
 ecdsa_sign_compact(_, _, _, _) ->
 	erlang:nif_error({error, not_loaded}).
 
--spec ecdsa_recover_compact(binary(), signature(), compression(), recovery_id()) -> {ok, public_key()}.
+-spec ecdsa_recover_compact(binary(), signature(), compression(), recovery_id()) -> {ok, public_key()} | {error, string()}.
 ecdsa_recover_compact(_, _, _, _) ->
 	erlang:nif_error({error, not_loaded}).
 
