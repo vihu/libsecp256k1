@@ -33,66 +33,91 @@
 -define(APPNAME, libsecp256k1).
 -define(LIBNAME, libsecp256k1_nif).
 
+-type hash() :: binary().
+-type public_key() :: binary().
+-type private_key() :: binary().
+-type compression() :: compressed | uncompressed.
+-type signature() :: binary().
+-type recovery_id() :: integer().
+
 %% API
-
+-spec dsha256(binary()) -> hash().
 dsha256(_) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec sha256(binary()) -> hash().
 sha256(_) ->
-    not_loaded(?LINE).
+    erlang:nif_error({error, not_loaded}).
 
+-spec hmac_sha256(binary(), binary()) -> hash().
 hmac_sha256(_, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
 %% testing PRNG
+-spec rand32() -> binary().
 rand32() ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec rand256() -> binary().
 rand256() ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
 %% Ecdsa functions
+-spec ec_seckey_verify(private_key()) -> ok | error.
 ec_seckey_verify(_) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_pubkey_create(private_key(), compression()) -> {ok, public_key()} | {error, string()}.
 ec_pubkey_create(_, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_pubkey_decompress(public_key()) -> {ok, public_key()} | {error, string()}.
 ec_pubkey_decompress(_) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_pubkey_verify(public_key()) -> ok | error.
 ec_pubkey_verify(_) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_privkey_export(private_key(), compression()) -> {ok, binary()} | {error, string()}.
 ec_privkey_export(_, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_privkey_import(binary()) -> {ok, private_key()} | {error, string()}.
 ec_privkey_import(_) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_privkey_tweak_add(private_key(), binary()) -> {ok, private_key()} | {error, string()}.
 ec_privkey_tweak_add(_, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_pubkey_tweak_add(public_key(), binary()) -> {ok, public_key()} | {error, string()}.
 ec_pubkey_tweak_add(_, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_privkey_tweak_mul(private_key(), binary()) -> {ok, private_key()} | {error, string()}.
 ec_privkey_tweak_mul(_, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ec_pubkey_tweak_mul(public_key(), binary()) -> {ok, public_key()} | {error, string()}.
 ec_pubkey_tweak_mul(_, _) -> 
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ecdsa_sign(binary(), private_key(), atom(), binary()) -> {ok, signature()} | {error, string()}.
 ecdsa_sign(_, _, _, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ecdsa_verify(binary(), signature(), public_key()) -> ok | error.
 ecdsa_verify(_, _, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ecdsa_sign_compact(binary(), private_key(), atom(), binary()) -> {ok, signature(), recovery_id()} | {error, string()}.
 ecdsa_sign_compact(_, _, _, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
+-spec ecdsa_recover_compact(binary(), signature(), compression(), recovery_id()) -> {ok, public_key()}.
 ecdsa_recover_compact(_, _, _, _) ->
-	not_loaded(?LINE).
+	erlang:nif_error({error, not_loaded}).
 
 %% Iternal functions
 

@@ -6,7 +6,7 @@
 {application, libsecp256k1,
  [
   {description, "Erlang NIF bindings for the the libsecp256k1 library"},
-  {vsn, "0.1.0"},
+  {vsn, "0.1.1"},
   {maintainers, ["Matthew Branton", "Geoffrey Hayes"]},
   {links, [{"Github", "https://github.com/exthereum/libsecp256k1"}]},
   {licenses, ["MIT"]},
