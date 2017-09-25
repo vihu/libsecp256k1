@@ -67,7 +67,8 @@ compact_signing() ->
 	{ok, Pubkey} = libsecp256k1:ec_pubkey_create(A, uncompressed),
 	{ok, Signature, RecoveryID} = libsecp256k1:ecdsa_sign_compact(Msg, A, default, <<>>),
 	{ok, RecoveredKey} = libsecp256k1:ecdsa_recover_compact(Msg, Signature, uncompressed, RecoveryID),
-	?assertEqual(Pubkey, RecoveredKey).
+	?assertEqual(Pubkey, RecoveredKey),
+	?assertEqual(ok, libsecp256k1:ecdsa_verify_compact(Msg, Signature, Pubkey)).
 
 sha256() ->
 	A = crypto:strong_rand_bytes(64),
