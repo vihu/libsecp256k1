@@ -26,6 +26,7 @@
 		 ecdsa_sign/4,
 		 ecdsa_verify/3,
 		 ecdsa_sign_compact/4,
+		 ecdsa_verify_compact/3,
 		 ecdsa_recover_compact/4]).
 
 -on_load(init/0).
@@ -113,6 +114,10 @@ ecdsa_verify(_, _, _) ->
 
 -spec ecdsa_sign_compact(binary(), private_key(), atom(), binary()) -> {ok, signature(), recovery_id()} | {error, string()}.
 ecdsa_sign_compact(_, _, _, _) ->
+	erlang:nif_error({error, not_loaded}).
+
+-spec ecdsa_verify_compact(binary(), signature(), public_key()) -> ok | error.
+ecdsa_verify_compact(_, _, _) ->
 	erlang:nif_error({error, not_loaded}).
 
 -spec ecdsa_recover_compact(binary(), signature(), compression(), recovery_id()) -> {ok, public_key()} | {error, string()}.

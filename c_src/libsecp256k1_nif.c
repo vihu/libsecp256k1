@@ -582,6 +582,41 @@ ecdsa_sign_compact(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 }
 
 static ERL_NIF_TERM
+ecdsa_verify_compact(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
+{
+	ErlNifBinary message, rawsignature, rawpubkey;
+    secp256k1_ecdsa_signature signature;
+    secp256k1_pubkey pubkey;
+	int result;
+
+	if (!enif_inspect_binary(env, argv[0], &message)) {
+       return enif_make_badarg(env);
+    }
+
+	if (!enif_inspect_binary(env, argv[1], &rawsignature)) {
+       return enif_make_badarg(env);
+    }
+
+	if (!enif_inspect_binary(env, argv[2], &rawpubkey)) {
+       return enif_make_badarg(env);
+    }
+
+	// Parse serialized signature
+	if (secp256k1_ecdsa_signature_parse_compact(ctx, &signature, rawsignature.data) != 1) {
+		return error_result(env, "ecdsa signature der parse error");
+	}
+	// Parse serialized public key
+	
+	if (secp256k1_ec_pubkey_parse(ctx, &pubkey, rawpubkey.data, rawpubkey.size) != 1) {
+		return error_result(env, "Public key invalid");
+	};
+
+	result = secp256k1_ecdsa_verify(ctx, &signature, message.data, &pubkey);
+
+	return atom_from_result(env, result);
+}
+
+static ERL_NIF_TERM
 ecdsa_recover_compact(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 {
 	ERL_NIF_TERM r;
@@ -752,6 +787,7 @@ static ErlNifFunc nif_funcs[] = {
 	{"ecdsa_sign", 4, ecdsa_sign},
 	{"ecdsa_verify", 3, ecdsa_verify},
 	{"ecdsa_sign_compact", 4, ecdsa_sign_compact},
+	{"ecdsa_verify_compact", 3, ecdsa_verify_compact},
 	{"ecdsa_recover_compact", 4, ecdsa_recover_compact}
 };
 
