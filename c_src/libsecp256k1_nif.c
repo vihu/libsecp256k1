@@ -63,12 +63,12 @@ dsha256(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 	// Create a NIF binary object with a 32 byte return
 	output = enif_make_new_binary(env, 32, &r);
 
-    secp256k1_sha256_t hasher;
+    secp256k1_sha256 hasher;
     secp256k1_sha256_initialize(&hasher);
     secp256k1_sha256_write(&hasher, (const unsigned char*)(p.data), p.size);
     secp256k1_sha256_finalize(&hasher, output);
 
-    secp256k1_sha256_t hasher2;
+    secp256k1_sha256 hasher2;
     secp256k1_sha256_initialize(&hasher2);
     secp256k1_sha256_write(&hasher2, (const unsigned char*)(output), 32);
     secp256k1_sha256_finalize(&hasher2, output);
@@ -90,7 +90,7 @@ sha256(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
 	// Create a NIF binary object with a 32 byte return
 	output = enif_make_new_binary(env, 32, &r);
-    secp256k1_sha256_t hasher;
+    secp256k1_sha256 hasher;
     secp256k1_sha256_initialize(&hasher);
     secp256k1_sha256_write(&hasher, (const unsigned char*)(p.data), p.size);
     secp256k1_sha256_finalize(&hasher, output);
@@ -115,7 +115,7 @@ hmac_sha256(ErlNifEnv* env, int argc, const ERL_NIF_TERM argv[])
 
 	// Create a NIF binary object with a 32 byte return
 	output = enif_make_new_binary(env, 32, &r);
-    secp256k1_hmac_sha256_t hasher;
+    secp256k1_hmac_sha256 hasher;
     secp256k1_hmac_sha256_initialize(&hasher, (const unsigned char*)(key.data), key.size);
     secp256k1_hmac_sha256_write(&hasher, (const unsigned char*)(input.data), input.size);
     secp256k1_hmac_sha256_finalize(&hasher, output);
