@@ -1,0 +1,23 @@
+version: 2.0
+jobs:
+  test:
+    docker:
+      - image: circleci/elixir
+    working_directory: ~/libsecp256k1
+    steps:
+      - run: sudo apt-get install libgmp3-dev
+      - checkout:
+          path: ~/libsecp256k1
+      - restore_cache:
+          key: c_src
+      - run: rebar compile eunit
+      - save_cache:
+          key: c_src-{{ epoch }}
+          paths:
+            - c_src
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test
