@@ -1,4 +1,5 @@
-Erlang NIF C libsecp256k1
+# Erlang NIF C libsecp256k1 [![CircleCI](https://circleci.com/gh/exthereum/libsecp256k1.svg?style=svg)](https://circleci.com/gh/exthereum/libsecp256k1)
+
 ============
 
 Bindings for most of the library functionality
