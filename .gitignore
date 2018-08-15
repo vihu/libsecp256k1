@@ -1,7 +1,8 @@
-.rebar
 c_src/*.o
 c_src/secp256k1
 ebin
 priv/*.so
 .eunit
 c_src/*.d
+_build/
+deps/

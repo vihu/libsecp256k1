@@ -2,19 +2,27 @@ version: 2.0
 jobs:
   test:
     docker:
-      - image: circleci/elixir
+      - image: elixir:latest
     working_directory: ~/libsecp256k1
     steps:
-      - run: sudo apt-get install libgmp3-dev
+      - run: apt-get update; apt-get -y install libtool autoconf libgmp3-dev
       - checkout:
           path: ~/libsecp256k1
       - restore_cache:
-          key: c_src
-      - run: rebar compile eunit
+         keys:
+           - v1-dependency-cache-{{ arch }}-{{ checksum "mix.lock" }}
+           - v1-dependency-cache-{{ arch }}
+           - v1-dependency-cache
+      - run: mix local.hex --force
+      - run: mix deps.get
+      - run: mix compile 
+      - run: mix eunit
       - save_cache:
-          key: c_src-{{ epoch }}
+          key: v1-dependency-cache-{{ arch }}-{{ checksum "mix.lock" }}
           paths:
-            - c_src
+            - _build
+            - deps
+            - ~/.mix
 
 workflows:
   version: 2
