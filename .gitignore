@@ -6,3 +6,5 @@ priv/*.so
 c_src/*.d
 _build/
 deps/
+.rebar
+doc/
