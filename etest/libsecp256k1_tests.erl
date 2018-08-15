@@ -76,15 +76,18 @@ sha256() ->
 	?assertEqual(DoubleHashed, libsecp256k1:sha256(libsecp256k1:sha256(A))),
 	?assertEqual(DoubleHashed, libsecp256k1:dsha256(A)).
 
-secp235k1_test_() -> 
-  {fun start/0,
+secp256k1_test_() -> 
+  {setup,
+  fun start/0,
   fun stop/1,
-  fun create_keys/0,
-	fun invalid_keys/0,
-	fun import_export/0,
-	fun tweaks/0,
-	fun signing/0,
-	fun blank_msg/0,
-	fun compact_signing/0,
-	fun sha256/0
+   [
+		{"Create keys", fun create_keys/0},
+		{"Invalid keys", fun invalid_keys/0},
+		{"Import export", fun import_export/0},
+		{"Curve tweaks", fun tweaks/0},
+		{"Signing", fun signing/0},
+		{"Blank sign", fun blank_msg/0},
+		{"Compact", fun compact_signing/0},
+		{"Sha256", fun sha256/0}
+   ]
   }.
