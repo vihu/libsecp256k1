@@ -4,7 +4,7 @@ defmodule Libsecp256k1.Mixfile do
   def project do
     {filelist, 0} = System.cmd("git", ["ls-files"])
     [app: :libsecp256k1,
-     version: "0.1.5",
+     version: "0.1.6",
      language: :erlang,
      description: "Erlang NIF bindings for the the libsecp256k1 library",
      package: [
