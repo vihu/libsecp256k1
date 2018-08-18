@@ -22,17 +22,12 @@ endif
 
 LDFLAGS += c_src/secp256k1/.libs/libsecp256k1.a -lgmp
 
-.PHONY: all libsecp256k1 clean
+.PHONY: clean
 
-all: c_src/secp256k1/.libs/libsecp256k1.a priv/libsecp256k1_nif.so libsecp256k1
-
-libsecp256k1:
-	$(MIX) compile
-
-c_src/secp256k1/.libs/libsecp256k1.a: c_src
-		c_src/build_deps.sh
+all: priv/libsecp256k1_nif.so
 
 priv/libsecp256k1_nif.so: c_src/libsecp256k1_nif.c
+	c_src/build_deps.sh
 	$(CC) $(CFLAGS) -shared $(LDFLAGS) -o $@ c_src/libsecp256k1_nif.c
 
 clean:
