@@ -24,7 +24,7 @@ defmodule Libsecp256k1.Mixfile do
        licenses: ["MIT"],
        links: %{"GitHub" => "https://github.com/exthereum/libsecp256k1"}
      ],
-     compilers: [:make_bindings, :erlang],
+     compilers: [:make_bindings, :erlang, :app],
      deps: deps()
      ]
   end
