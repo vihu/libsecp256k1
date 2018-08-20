@@ -15,7 +15,7 @@ defmodule Libsecp256k1.Mixfile do
   def project do
     [
       app: :libsecp256k1,
-      version: "0.1.8",
+      version: "0.1.9",
       language: :erlang,
       description: "Erlang NIF bindings for the the libsecp256k1 library",
       package: [
