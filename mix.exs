@@ -15,7 +15,7 @@ defmodule Libsecp256k1.Mixfile do
   def project do
     {filelist, 0} = System.cmd("git", ["ls-files"])
     [app: :libsecp256k1,
-     version: "0.1.7",
+     version: "0.1.8",
      language: :erlang,
      description: "Erlang NIF bindings for the the libsecp256k1 library",
      package: [
@@ -24,7 +24,7 @@ defmodule Libsecp256k1.Mixfile do
        licenses: ["MIT"],
        links: %{"GitHub" => "https://github.com/exthereum/libsecp256k1"}
      ],
-     compilers: [:make_bindings, :erlang],
+     compilers: [:make_bindings, :erlang, :app],
      deps: deps()
      ]
   end
