@@ -10,7 +10,7 @@ else
 	LIB_PATH = deps/libsecp256k1
 endif
 
-CFLAGS += -I$LIB_PATH/src
+CFLAGS += -I$(LIB_PATH)/src
 
 ifneq ($(OS),Windows_NT)
 	CFLAGS += -fPIC
@@ -28,7 +28,7 @@ all: priv/libsecp256k1_nif.so
 
 priv/libsecp256k1_nif.so: c_src/libsecp256k1_nif.c
 	c_src/build_deps.sh
-	$(CC) $(CFLAGS) -shared $(LDFLAGS) -o $@ c_src/libsecp256k1_nif.c
+	$(CC) $(CFLAGS) -shared -o $@ c_src/libsecp256k1_nif.c $(LDFLAGS)
 
 clean:
 	$(MIX) clean
